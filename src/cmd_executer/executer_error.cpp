@@ -3,7 +3,7 @@
 
 bool ExecuterError::DoAction(cmd_info &info) {
     bool ret = false;
-    if(info.type==cmd_type::cmd_exit) {
+    if(info.type==cmd_type::cmd_error) {
         info.dscription = "bool ExecuterExit::DoAction(cmd_info &info) starting";
         ret = true;
         //todo start a thread to do the work

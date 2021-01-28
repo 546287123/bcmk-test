@@ -4,11 +4,11 @@
 
 #include "../common/action_def.h"
 
-class ExecuterInterface{
+class CmdExecuter{
 public:
-ExecuterInterface(){};
-~ExecuterInterface(){};
-static ExecuterInterface &GetInstance();
+CmdExecuter(){};
+~CmdExecuter(){};
+static CmdExecuter &GetInstance();
 public:
 bool DoAction(cmd_info &info);
 };
