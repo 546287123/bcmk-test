@@ -9,6 +9,8 @@ ParserDoaction(){};
 virtual ~ParserDoaction(){};
 public:
 virtual bool DoParser(string cmd, cmd_info &info);
+private:
+bool CkeckActionCmd(string cmd, cmd_info &info);
 };
 
 #endif

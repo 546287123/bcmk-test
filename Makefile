@@ -41,4 +41,4 @@ $(BIN)/$(EXECUTABLE): $(OBJECTS)
 	$(CC) $(CFLAGS) $(CINCLUDES) $(CLIBS) $^ -o $@ $(LIBRARIES)
 
 .cpp.o:
-	$(CC) -c -Og  $^ -o $@
+	$(CC) -c -g  $^ -o $@
