@@ -41,6 +41,12 @@ struct cmd_task_info {
     cmd_info info;
     cmd_task_status status;
     task_result result;
+
+    bool GetNewTaskID() {
+        static int nTaskId = 0;
+        nTaskId++;
+        return nTaskId;
+    }
 };
 
 #endif
