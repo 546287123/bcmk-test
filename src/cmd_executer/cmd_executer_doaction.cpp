@@ -12,6 +12,7 @@ bool ExecuterDoAction::DoAction(cmd_info &info) {
         task_info.status = cmd_task_status::cmd_task_ready;
         CmdTaskMgr::GetInstance().AddOne(task_info);
         ret = true;
+        
     }
     return ret;
 }
