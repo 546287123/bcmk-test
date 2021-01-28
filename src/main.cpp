@@ -14,6 +14,11 @@ int main(int argc, char *argv[])
 		cout << info.dscription << endl;
 		bool ret = CmdExecuter::GetInstance().DoAction(info);
 		cout << info.dscription << endl;
+		if(ret) {
+			if(info.type==cmd_type::cmd_exit) {
+				break;
+			}
+		}
 	}
-	std::cout << "Hello world!" << std::endl;
+	std::cout << "AllStopped!" << std::endl;
 }
