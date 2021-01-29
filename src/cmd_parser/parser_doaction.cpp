@@ -1,10 +1,13 @@
 
 #include "parser_doaction.h"
+#include "../cmd_plugin/cmd_plug_mgr.h"
 
 bool ParserDoaction::CkeckActionCmd(string cmd, cmd_info &info) {
-    bool ret = true;
+    bool ret = false;
     if(cmd.length()) {
-        ret = true;
+        if(CmdPlugMgr::GetInstance().AnalyseCmd(cmd, info)){
+            ret = true;
+        }
     }
     return ret;
 }

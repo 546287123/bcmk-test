@@ -14,8 +14,16 @@ enum cmd_type {
     cmd_end,
 };
 
+enum plug_type {
+    plug_type_shell,
+    plug_type_python,
+    plug_type_end,
+};
+
 struct cmd_info {
     cmd_type type;
+    plug_type p_type;
+    string cmd_func;
     vector<string> cmd_vec;
     string dscription;
 };
@@ -48,5 +56,6 @@ struct cmd_task_info {
         return nTaskId;
     }
 };
+
 
 #endif
