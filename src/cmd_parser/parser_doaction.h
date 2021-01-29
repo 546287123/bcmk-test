@@ -5,12 +5,12 @@
 
 class ParserDoaction : public ParserBase{
 public:
-ParserDoaction(){};
-virtual ~ParserDoaction(){};
+    ParserDoaction(){};
+    virtual ~ParserDoaction(){};
 public:
-virtual bool DoParser(string cmd, cmd_info &info);
+    virtual bool DoParser(std::string cmd, cmd_info &info);
 private:
-bool CkeckActionCmd(string cmd, cmd_info &info);
+    bool CkeckActionCmd(std::string cmd, cmd_info &info);
 };
 
 #endif

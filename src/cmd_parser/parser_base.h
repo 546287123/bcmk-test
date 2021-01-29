@@ -10,7 +10,7 @@ public:
 ParserBase(){};
 virtual ~ParserBase(){};
 public:
-virtual bool DoParser(string cmd, cmd_info &info) = 0;
+virtual bool DoParser(std::string cmd, cmd_info &info) = 0;
 };
 
 #endif

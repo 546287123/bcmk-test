@@ -1,19 +1,21 @@
 
 #include "cmd_config_tools.h"
+#include <iostream>
+#include <fstream>
 
 std::shared_ptr<std::vector<std::string>> ParamGenerFixed::GeneratePars(param par) {
 
 }
 
 std::shared_ptr<std::vector<std::string>> ParamGenerEnumed::GeneratePars(param par) {
-    
+
 }
 
 std::shared_ptr<std::vector<std::string>> ParamGenerFromTo::GeneratePars(param par) {
     
 }
 
-CmdConfigTools &CmdConfigTools:: GetInstance() {
+CmdConfigTools &CmdConfigTools::GetInstance() {
     static CmdConfigTools instance;
     return instance;
 }
@@ -74,4 +76,46 @@ std::shared_ptr<std::vector<std::string>> CmdConfigTools::GenerateCmds(task_conf
     }
     //
     return cmds;
+}
+
+bool CmdConfigTools::LoadFromJson(std::string file, task_config &task_cfg) {
+    //
+    DoOneSaveTest(file);
+    //
+    bool ret = false;
+    std::string str;
+    std::ifstream ifs(file.c_str(), std::ios::in);
+    std::string line;
+    while (ifs>>line) {
+        str += line;
+    }
+    ifs.close();
+    if(str.length()) {
+        task_cfg.json_decode(str);
+        ret = true;
+    }
+    return ret;
+}
+
+bool CmdConfigTools::SaveToJson(std::string file, task_config task_cfg) {
+    bool ret = false;
+    std::string str = task_cfg.json_encode();
+    std::ofstream ofs(file.c_str(), std::ios::out);
+    if(ofs.is_open()) {
+        ofs << str;
+        ret = true;
+    }
+    ofs.close();
+    return ret;
+}
+
+bool CmdConfigTools::DoOneSaveTest(std::string file) {
+    bool ret = false;
+    task_config task_cfg;
+    param par[5];
+    for(int i=0; i<5; i++) {
+        task_cfg.params.push_back(par[i]);
+    }
+    ret = SaveToJson(file, task_cfg);
+    return true;
 }

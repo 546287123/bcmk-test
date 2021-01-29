@@ -4,8 +4,6 @@
 
 #include "cmd_config.h"
 
-using namespace shine;
-
 class ParamGenerBase {
 public:
     ParamGenerBase(){};
@@ -45,9 +43,14 @@ public:
     ~CmdConfigTools(){};
     static CmdConfigTools &GetInstance();
 public:
+    //
     std::shared_ptr<std::vector<std::string>> GeneratePars(param par);
     std::shared_ptr<std::vector<std::string>> GenerateCmds(task_config task_cfg);
-    
+    //
+    bool LoadFromJson(std::string file, task_config &task_cfg);
+    bool SaveToJson(std::string file, task_config task_cfg);
+private:
+    bool DoOneSaveTest(std::string file);
 };
 
 

@@ -5,7 +5,7 @@
 bool ExecuterExit::DoAction(cmd_info &info){
     bool ret = false;
     if(info.type==cmd_type::cmd_exit) {
-        info.dscription = "bool ExecuterExit::DoAction(cmd_info &info) starting";
+        info.description = "bool ExecuterExit::DoAction(cmd_info &info) starting";
         ret = true;
         CmdTaskMgr::GetInstance().Stop();
     }

@@ -6,10 +6,10 @@
 
 class ParserError : public ParserBase{
 public:
-ParserError(){};
-virtual ~ParserError(){};
+    ParserError(){};
+    virtual ~ParserError(){};
 public:
-virtual bool DoParser(string cmd, cmd_info &info);
+    virtual bool DoParser(std::string cmd, cmd_info &info);
 };
 
 #endif

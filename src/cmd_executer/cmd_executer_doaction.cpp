@@ -5,7 +5,7 @@
 bool ExecuterDoAction::DoAction(cmd_info &info) {
     bool ret = false;
     if(info.type==cmd_type::cmd_do_action) {
-        info.dscription = "bool ExecuterDoAction::DoAction(cmd_info &info) starting";
+        info.description = "bool ExecuterDoAction::DoAction(cmd_info &info) starting";
         cmd_task_info task_info;
         task_info.task_id = task_info.GetNewTaskID();
         task_info.info = info;

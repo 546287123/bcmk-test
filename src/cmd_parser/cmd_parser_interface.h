@@ -9,7 +9,7 @@ CmdParser(){};
 ~CmdParser(){};
 static CmdParser &GetInstance();
 public:
-cmd_info DoParser(string cmd);
+cmd_info DoParser(std::string cmd);
 };
 
 #endif

@@ -11,9 +11,9 @@ int main(int argc, char *argv[])
 		string cmd;
 		cin >> cmd;
 		cmd_info info = CmdParser::GetInstance().DoParser(cmd);
-		cout << info.dscription << endl;
+		cout << info.description << endl;
 		bool ret = CmdExecuter::GetInstance().DoAction(info);
-		cout << info.dscription << endl;
+		cout << info.description << endl;
 		if(ret) {
 			if(info.type==cmd_type::cmd_exit) {
 				break;

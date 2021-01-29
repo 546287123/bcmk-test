@@ -23,38 +23,39 @@ enum param_chg_mod {
 };
 
 struct Fixed {
-    std::string value;
+    std::string value = "FixedValue";
     SHINE_JSON_MODEL(Fixed, value);
 }
 
 struct Enumed {
-    std::vector<std::string> values;
+    std::vector<std::string> values = {"EnumedValue0","EnumedValue1"};
     SHINE_JSON_MODEL(Enumed, values);
 };
 
 struct FromTo {
-    int from;
-    int to;
-    int step;
+    int from = 0;
+    int to = 520;
+    int step = 1;
     SHINE_JSON_MODEL(FromTo, from, to, step);
 };
 
 struct param {
-    int par_type;
-    int par_mod;
+    int par_type = param_type::PARAM_TYPE_STR;
+    int par_mod = param_chg_mod::PARAM_CHG_M_FIXED;
     Fixed fixed;
     Enumed enumed;
     FromTo fromto;
-    std::string dscription;
-    SHINE_JSON_MODEL(param, par_type, par_mod, fixed, enumed, fromto, dscription);
+    std::string description = "Param Description";
+    SHINE_JSON_MODEL(param, par_type, par_mod, fixed, enumed, fromto, description);
 };
 
 struct task_config {
-	std::string program;
+	std::string program = "./benchmark/localmemory";
+    std::string run_type = "shell"; //shell or python
     std::vector<param> params;
-    std::string env;
-    std::string dscription;
-	SHINE_JSON_MODEL(task_config, program, params, env, dscription);
+    std::string env = "env";
+    std::string description = "Task Config Description";
+	SHINE_JSON_MODEL(task_config, program, run_type, params, env, description);
 };
 
 #endif

@@ -6,13 +6,12 @@
 
 class ParserExit : public ParserBase{
 public:
-ParserExit(){};
-virtual ~ParserExit(){};
+    ParserExit(){};
+    virtual ~ParserExit(){};
 public:
-virtual bool DoParser(string cmd, cmd_info &info);
-
+    virtual bool DoParser(std::string cmd, cmd_info &info);
 private:
-void Do(cmd_info &info);
+    void Do(cmd_info &info);
 };
 
 #endif

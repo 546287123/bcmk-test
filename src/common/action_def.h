@@ -4,8 +4,7 @@
 
 #include <string>
 #include <vector>
-
-using namespace std;
+#include <memory>
 
 enum cmd_type {
     cmd_exit,
@@ -20,12 +19,30 @@ enum plug_type {
     plug_type_end,
 };
 
+static std::string plug_type_desp[plug_type_end] = {
+    "shell",
+    "python",
+};
+
 struct cmd_info {
     cmd_type type;
     plug_type p_type;
-    string cmd_func;
-    vector<string> cmd_vec;
-    string dscription;
+    std::string cmd_json;
+    std::shared_ptr<std::vector<std::string>> cmds;
+    std::string env;
+    std::string description;
+
+    bool ResetPlugType(std::string run_type) {
+        bool ret = false;
+        for(int i=0; i<plug_type::plug_type_end; i++) {
+            if(plug_type_desp[i]==run_type) {
+                p_type = plug_type(i);
+                ret = true;
+            }
+        }
+        return ret;
+    }
+
 };
 
 enum cmd_task_status {
@@ -39,9 +56,9 @@ enum cmd_task_status {
 };
 
 struct task_result {
-    string description;
-    string throughput;
-    string latency;
+    std::string description;
+    std::string throughput;
+    std::string latency;
 };
 
 struct cmd_task_info {
