@@ -12,18 +12,20 @@ using namespace std;
 
 class CmdTaskRunner {
 public:
-    CmdTaskRunner();
-    virtual ~CmdTaskRunner();
+    CmdTaskRunner(){};
+    virtual ~CmdTaskRunner(){};
 public:
-    virtual bool Start();
-    virtual bool Stop();
-    virtual bool Quit();
-    virtual shared_ptr<cmd_task_info> GetTaskInfo();
+    bool Start();
+    bool Stop();
+    bool SkipCur();
+    shared_ptr<cmd_task_info> GetTask();
+    bool SetTask(shared_ptr<cmd_task_info> task);
 protected:
     void run();
 protected:
-    cmd_task_info _task_info;
-    shared_ptr<thread> _runner;
+    shared_ptr<cmd_task_info> _task;
+    thread _thread;
+    volatile int _over = false;
 };
 
 #endif

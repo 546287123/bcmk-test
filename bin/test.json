@@ -1,0 +1,103 @@
+{
+    "program": "./benchmark/localmemory",
+    "run_type": "shell",
+    "params": [
+        {
+            "par_type": 0,
+            "par_mod": 0,
+            "fixed": {
+                "value": "FixedValue"
+            },
+            "enumed": {
+                "values": [
+                    "EnumedValue0",
+                    "EnumedValue1"
+                ]
+            },
+            "fromto": {
+                "from": 0,
+                "to": 520,
+                "step": 1
+            },
+            "description": "Param Description"
+        },
+        {
+            "par_type": 0,
+            "par_mod": 0,
+            "fixed": {
+                "value": "FixedValue"
+            },
+            "enumed": {
+                "values": [
+                    "EnumedValue0",
+                    "EnumedValue1"
+                ]
+            },
+            "fromto": {
+                "from": 0,
+                "to": 520,
+                "step": 1
+            },
+            "description": "Param Description"
+        },
+        {
+            "par_type": 0,
+            "par_mod": 0,
+            "fixed": {
+                "value": "FixedValue"
+            },
+            "enumed": {
+                "values": [
+                    "EnumedValue0",
+                    "EnumedValue1"
+                ]
+            },
+            "fromto": {
+                "from": 0,
+                "to": 520,
+                "step": 1
+            },
+            "description": "Param Description"
+        },
+        {
+            "par_type": 0,
+            "par_mod": 0,
+            "fixed": {
+                "value": "FixedValue"
+            },
+            "enumed": {
+                "values": [
+                    "EnumedValue0",
+                    "EnumedValue1"
+                ]
+            },
+            "fromto": {
+                "from": 0,
+                "to": 520,
+                "step": 1
+            },
+            "description": "Param Description"
+        },
+        {
+            "par_type": 0,
+            "par_mod": 0,
+            "fixed": {
+                "value": "FixedValue"
+            },
+            "enumed": {
+                "values": [
+                    "EnumedValue0",
+                    "EnumedValue1"
+                ]
+            },
+            "fromto": {
+                "from": 0,
+                "to": 520,
+                "step": 1
+            },
+            "description": "Param Description"
+        }
+    ],
+    "env": "env",
+    "description": "Task Config Description"
+}

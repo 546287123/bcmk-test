@@ -17,8 +17,8 @@ bool CmdTaskMgr::Stop() {
 bool CmdTaskMgr::Quit() {
     return true;
 }
-
-bool CmdTaskMgr::TraceTask() {
+    
+bool CmdTaskMgr::SkipCur() {
     return true;
 }
 
@@ -26,31 +26,8 @@ bool CmdTaskMgr::AddOne(cmd_task_info info) {
     return true;
 }
 
-bool CmdTaskMgr::RemoveOne(cmd_task_info info) {
+//
+bool CmdTaskMgr::SetCallback(TaskMgrCBLog log_cb, TaskMgrCB cb) {
     return true;
 }
-
-bool CmdTaskMgr::ReadyOne(cmd_task_info info) {
-    return true;
-}
-
-bool CmdTaskMgr::StopCurrent() {
-    return true;
-}
-
-
-bool CmdTaskMgr::TraceReadyTask() {
-    return true;
-}
-
-bool CmdTaskMgr::TraceRunningTask() {
-    return true;
-}
-
-bool CmdTaskMgr::TraceOverTask() {
-    return true;
-}
-
-bool CmdTaskMgr::TraceDoneTask() {
-    return true;
-}
+//

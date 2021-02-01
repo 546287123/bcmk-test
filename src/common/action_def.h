@@ -46,12 +46,9 @@ struct cmd_info {
 };
 
 enum cmd_task_status {
-    cmd_task_empty,
     cmd_task_ready,
     cmd_task_running,
     cmd_task_done,
-    cmd_task_outputting,
-    cmd_task_over,
     cmd_task_end,
 };
 

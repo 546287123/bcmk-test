@@ -4,15 +4,25 @@
 #include <fstream>
 
 std::shared_ptr<std::vector<std::string>> ParamGenerFixed::GeneratePars(param par) {
-
+    std::shared_ptr<std::vector<std::string>> ret(new std::vector<std::string>());
+    ret->push_back(par.fixed.value);
+    return ret;
 }
 
 std::shared_ptr<std::vector<std::string>> ParamGenerEnumed::GeneratePars(param par) {
-
+    std::shared_ptr<std::vector<std::string>> ret(new std::vector<std::string>());
+    for(auto enum_v : par.enumed.values) {
+        ret->push_back(enum_v);
+    }
+    return ret;
 }
 
 std::shared_ptr<std::vector<std::string>> ParamGenerFromTo::GeneratePars(param par) {
-    
+    std::shared_ptr<std::vector<std::string>> ret(new std::vector<std::string>());
+    for(int i=par.fromto.from; i<par.fromto.to; i+=par.fromto.step) {
+        ret->push_back(std::to_string(i));
+    }
+    return ret;
 }
 
 CmdConfigTools &CmdConfigTools::GetInstance() {
@@ -52,7 +62,7 @@ std::shared_ptr<std::vector<std::string>> CmdConfigTools::GenerateCmds(task_conf
     std::shared_ptr<std::vector<std::string>> cmds(new std::vector<std::string>());
     std::vector<std::shared_ptr<std::vector<std::string>>> par_mat;
     std::vector<int> counts;
-    int total = 0;
+    int total = 1;
     for(auto par : task_cfg.params) {
         std::shared_ptr<std::vector<std::string>> pars = GeneratePars(par);
         par_mat.push_back(pars);
@@ -80,7 +90,7 @@ std::shared_ptr<std::vector<std::string>> CmdConfigTools::GenerateCmds(task_conf
 
 bool CmdConfigTools::LoadFromJson(std::string file, task_config &task_cfg) {
     //
-    DoOneSaveTest(file);
+    // DoOneSaveTest(file);
     //
     bool ret = false;
     std::string str;

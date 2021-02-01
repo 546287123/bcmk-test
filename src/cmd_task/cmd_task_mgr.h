@@ -5,8 +5,13 @@
 #include "../common/action_def.h"
 #include <vector>
 #include <map>
+#include <thread>
+#include <mutex>
 
 using namespace std;
+
+typedef bool (*TaskMgrCBLog)(std::string str);
+typedef bool (*TaskMgrCB)(std::string str);
 
 class CmdTaskMgr {
 public:
@@ -17,21 +22,11 @@ public:
     bool Start();
     bool Stop();
     bool Quit();
-    bool TraceTask();
+    bool SkipCur();
     bool AddOne(cmd_task_info info);
-    bool RemoveOne(cmd_task_info info);     
-    bool ReadyOne(cmd_task_info info);
-    bool StopCurrent();
-private:
-    bool TraceReadyTask();
-    bool TraceRunningTask();
-    bool TraceOverTask();
-    bool TraceDoneTask();
-private:
-    map<int, cmd_task_info> _all_task;
-    vector<int> _ready_task;
-    vector<int> _running_task;
-    vector<int> _over_task;
+    //
+    bool SetCallback(TaskMgrCBLog log_cb, TaskMgrCB cb);
+    //
 };
 
 #endif
