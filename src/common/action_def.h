@@ -71,5 +71,6 @@ struct cmd_task_info {
     }
 };
 
+typedef bool (*TaskMgrCB)(std::string str);
 
 #endif

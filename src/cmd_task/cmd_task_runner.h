@@ -13,8 +13,10 @@ using namespace std;
 class CmdTaskRunner {
 public:
     CmdTaskRunner(){};
-    virtual ~CmdTaskRunner(){};
+    ~CmdTaskRunner(){};
+    static CmdTaskRunner &GetInstance();
 public:
+    bool SetActionCB(TaskMgrCB action_cb);
     bool Start();
     bool Stop();
     bool SkipCur();
@@ -23,6 +25,7 @@ public:
 protected:
     void run();
 protected:
+    TaskMgrCB _action_cb;
     shared_ptr<cmd_task_info> _task;
     thread _thread;
     volatile int _over = false;

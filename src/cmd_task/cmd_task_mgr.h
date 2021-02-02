@@ -10,9 +10,6 @@
 
 using namespace std;
 
-typedef bool (*TaskMgrCBLog)(std::string str);
-typedef bool (*TaskMgrCB)(std::string str);
-
 class CmdTaskMgr {
 public:
     CmdTaskMgr(){};
@@ -25,7 +22,7 @@ public:
     bool SkipCur();
     bool AddOne(cmd_task_info info);
     //
-    bool SetCallback(TaskMgrCBLog log_cb, TaskMgrCB cb);
+    bool SetCallback(TaskMgrCB log_cb, TaskMgrCB cb);
     //
 };
 

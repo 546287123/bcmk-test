@@ -7,9 +7,13 @@ CmdTaskList &CmdTaskList::GetInstance() {
     return instance;
 }
 
-bool CmdTaskList::SetCB(TraceCB trace_cb) {
-    _trace_cb = trace_cb;
-    return true;
+bool CmdTaskList::SetLogCB(TaskMgrCB log_cb) {
+    bool bRet = false;
+    if(_log_cb) {
+        _log_cb = log_cb;
+        bRet = true;
+    }
+    return bRet;
 }
 
 bool CmdTaskList::Add(cmd_task_info info) {
@@ -74,8 +78,17 @@ bool CmdTaskList::TraceAll() {
         ss << "current task id:\t" << _cur_task_id << std::endl;
         ss << "done task count:\t" << _done_list.size() << std::endl;
     }
-    if(_trace_cb) {
-        _trace_cb(ss.str());
+    if(_log_cb) {
+        _log_cb(ss.str());
     }
+    return true;
+}
+
+bool CmdTaskList::Clear() {
+    std::unique_lock<std::mutex> lock(_task_mutex);
+    _task_map.clear();
+    _ready_list.clear();
+    _done_list.clear();
+    _cur_task_id = -1;
     return true;
 }
