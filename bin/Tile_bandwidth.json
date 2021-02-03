@@ -1,0 +1,114 @@
+{
+    "program": "./bin/Tile_bandwidth",
+    "run_type": "shell",
+    "params": [
+        {
+            "par_type": 0,
+            "par_mod": 0,
+            "fixed": {
+                "value": "1"
+            },
+            "description": "number of IPUs"
+        },
+        {
+            "par_type": 0,
+            "par_mod": 0,
+            "fixed": {
+                "value": "500"
+            },
+            "description": "number of tiles"
+        },
+        {
+            "par_type": 0,
+            "par_mod": 2,
+            "fixed": {
+                "value": "100"
+            },
+            "enumed": {
+                "values": [
+                    "EnumedValue0",
+                    "EnumedValue1"
+                ]
+            },
+            "fromto": {
+                "from": 100,
+                "to": 500,
+                "step": 50
+            },
+            "description": "block size"
+        },
+        {
+            "par_type": 0,
+            "par_mod": 0,
+            "fixed": {
+                "value": "1"
+            },
+            "description": "threads per tile"
+        },
+        {
+            "par_type": 0,
+            "par_mod": 0,
+            "fixed": {
+                "value": "100"
+            },
+            "description": "repeat times"
+        },
+        {
+            "par_type": 0,
+            "par_mod": 0,
+            "fixed": {
+                "value": "0"
+            },
+            "description": "verbose (on: 1, off: 0 )"
+        },
+        {
+            "par_type": 0,
+            "par_mod": 0,
+            "fixed": {
+                "value": "0"
+            },
+            "description": "profile (on: 1, off: 0 )"
+        },
+        {
+            "par_type": 0,
+            "par_mod": 0,
+            "fixed": {
+                "value": "0"
+            },
+            "description": "check result? (on: 1, off: 0 )"
+        },
+        {
+            "par_type": 0,
+            "par_mod": 0,
+            "fixed": {
+                "value": " "
+            },
+            "enumed": {
+                "values": [
+                    "EnumedValue0",
+                    "EnumedValue1"
+                ]
+            },
+            "fromto": {
+                "from": 0,
+                "to": 520,
+                "step": 1
+            },
+            "description": "Param Description"
+        }
+    ],
+    "env": "env",
+    "description": "Task Config Description",
+    "results": [
+        {
+            "key":"Elapsed Time",
+            "sep":":",
+            "end":","
+        },
+        {
+            "key":"Bandwidth",
+            "sep":":",
+            "end":","
+        }
+    ]
+}
