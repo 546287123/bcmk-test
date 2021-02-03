@@ -26,6 +26,27 @@ bool CmdPlugMgr::AnalyseCmd(std::string cmd, cmd_info &info) {
 }
 
 bool CmdPlugMgr::ExecuteCmd(cmd_info info) {
+    std::shared_ptr<CmdPlugBase> plug;
+    switch (info.p_type)
+    {
+    case plug_type_shell:
+        plug.reset(new CmdPlugShell());
+        break;
+    case plug_type_python:
+        plug.reset(new CmdPlugPython());
+        break;
+    default:
+        break;
+    }
 
+    if(plug) {
+        plug->ExecuteCmd(info);
+    }
+
+    return true;
+}
+
+bool CmdPlugMgr::Exit() {
+    
     return true;
 }

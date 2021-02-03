@@ -1,6 +1,7 @@
 
 #include "cmd_task_runner.h"
 #include "cmd_task_list.h"
+#include "../cmd_plugin/cmd_plug_mgr.h"
 
 CmdTaskRunner &CmdTaskRunner::GetInstance() {
     static CmdTaskRunner instance;
@@ -23,7 +24,8 @@ bool CmdTaskRunner::Start() {
 }
 
 bool CmdTaskRunner::Stop() {
-    _over = true;
+    CmdTaskList::GetInstance().Clear();
+    CmdPlugMgr::GetInstance().Exit();
     return true;
 }
 
@@ -31,16 +33,17 @@ bool CmdTaskRunner::SkipCur() {
     return true;
 }
 
-shared_ptr<cmd_task_info> CmdTaskRunner::GetTask() {
-    return _task;
-}
-
-bool CmdTaskRunner::SetTask(shared_ptr<cmd_task_info> task) {
-    _task = task;
-    return true;
-}
-
 void CmdTaskRunner::run() {
-    
+    while (true) {
+        if(!CmdTaskList::GetInstance().WaitforNewTask()) {
+            break;
+        }
+        cmd_task_info info;
+        if(CmdTaskList::GetInstance().GetNext(info)) {
+            info.status = cmd_task_status::cmd_task_running;
+            CmdTaskList::GetInstance().UpdateTask(info);
+            CmdPlugMgr::GetInstance().ExecuteCmd(info.info);
+        }
+    }
     return;
 }

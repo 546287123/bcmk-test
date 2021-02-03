@@ -12,6 +12,7 @@ public:
 public:
     virtual bool AnalyseCmd(std::string cmd, cmd_info &info) = 0;
     virtual bool ExecuteCmd(cmd_info info) = 0;
+    virtual bool Exit() = 0;
 };
 
 #endif

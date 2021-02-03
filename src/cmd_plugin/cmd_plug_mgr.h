@@ -4,6 +4,7 @@
 
 #include "../common/action_def.h"
 #include <string>
+#include <memory>
 
 using namespace std;
 
@@ -16,6 +17,7 @@ public:
 public:
     bool AnalyseCmd(string cmd, cmd_info &info);
     bool ExecuteCmd(cmd_info info);
+    bool Exit();
 };
 
 #endif

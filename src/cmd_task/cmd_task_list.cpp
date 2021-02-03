@@ -19,6 +19,10 @@ bool CmdTaskList::SetLogCB(TaskMgrCB log_cb) {
 bool CmdTaskList::Add(cmd_task_info info) {
     std::unique_lock<std::mutex> lock(_task_mutex);
     _ready_list.push_back(info.task_id);
+    _task_map[info.task_id] = info;
+    _ready_task_count++;
+    _wait_over = 1;
+    _cv_run.notify_all();
     return true;
 }
 
@@ -42,6 +46,7 @@ bool CmdTaskList::GetNext(cmd_task_info &info) {
         info = it->second;
         bRet = true;
         _ready_list.erase(std::begin(_ready_list));
+        _ready_task_count--;
     }
     return bRet;
 }
@@ -89,6 +94,20 @@ bool CmdTaskList::Clear() {
     _task_map.clear();
     _ready_list.clear();
     _done_list.clear();
+    _ready_task_count = 0;
     _cur_task_id = -1;
+    _wait_over = 1;
+    _cv_run.notify_all();
     return true;
+}
+
+bool CmdTaskList::WaitforNewTask() {
+    bool bRet = false;
+    std::unique_lock<std::mutex> lock(_mt_run);
+    _cv_run.wait(lock, [&]{ return _wait_over;});
+    _wait_over = 0;
+    if(_ready_task_count>0){
+        bRet = true;
+    }
+    return bRet;
 }

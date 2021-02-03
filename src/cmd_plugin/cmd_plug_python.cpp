@@ -1,10 +1,14 @@
 
 #include "cmd_plug_python.h"
 
-bool AnalyseCmd(std::string cmd, cmd_info &info) {
+bool CmdPlugPython::AnalyseCmd(std::string cmd, cmd_info &info) {
     return false;
 }
 
-bool ExecuteCmd(cmd_info info) {
+bool CmdPlugPython::ExecuteCmd(cmd_info info) {
+    return false;
+}
+
+bool CmdPlugPython::Exit() {
     return false;
 }

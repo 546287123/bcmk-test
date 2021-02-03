@@ -7,6 +7,7 @@
 #include <vector>
 #include <map>
 #include <mutex>
+#include <condition_variable>
 
 class CmdTaskList {
 public:
@@ -19,12 +20,20 @@ public:
     bool GetCur(cmd_task_info &info);
     bool GetNext(cmd_task_info &info);
     bool UpdateTask(cmd_task_info info);
-
+    //
     bool TraceAll();
     bool Clear();
+    //
+    bool WaitforNewTask();
 private:
     TaskMgrCB _log_cb = NULL;
     std::mutex _task_mutex;
+    //
+    std::condition_variable _cv_run;
+    std::mutex _mt_run;
+    volatile int _ready_task_count = 0;
+    volatile int _wait_over = 0;
+    //
 private:
     std::map<int, cmd_task_info> _task_map;
     std::vector<int> _ready_list;

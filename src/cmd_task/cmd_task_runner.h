@@ -20,15 +20,11 @@ public:
     bool Start();
     bool Stop();
     bool SkipCur();
-    shared_ptr<cmd_task_info> GetTask();
-    bool SetTask(shared_ptr<cmd_task_info> task);
 protected:
     void run();
 protected:
     TaskMgrCB _action_cb;
-    shared_ptr<cmd_task_info> _task;
     thread _thread;
-    volatile int _over = false;
 };
 
 #endif
