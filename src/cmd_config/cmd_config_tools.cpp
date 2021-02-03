@@ -125,7 +125,7 @@ std::string CmdConfigTools::JuiceOneResult(std::string str, std::vector<res_boul
         }
         std::string s = str.substr(sep_idx, end_idx-sep_idx+1);
         if(*std::rbegin(s)=='\n') {
-            *std::rbegin(s)='\0';
+            s = s.substr(0, s.length()-1);
         }
         //
         strRet += res.key;
