@@ -10,6 +10,7 @@ bool ExecuterDoAction::DoAction(cmd_info &info) {
         task_info.task_id = task_info.GetNewTaskID();
         task_info.info = info;
         task_info.status = cmd_task_status::cmd_task_ready;
+        task_info.info.result_file = info.cmd_json + ".res";
         CmdTaskMgr::GetInstance().AddOne(task_info);
         ret = true;
         

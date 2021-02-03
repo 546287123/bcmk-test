@@ -4,6 +4,7 @@
 
 #include "../../include/json.hpp"
 #include <vector>
+#include <map>
 #include <string>
 #include <memory>
 
@@ -49,13 +50,21 @@ struct param {
     SHINE_JSON_MODEL(param, par_type, par_mod, fixed, enumed, fromto, description);
 };
 
+struct cmd_result {
+    std::string key; //Elapsed Time
+    std::string sep; //:
+    std::string end; //,
+    SHINE_JSON_MODEL(cmd_result, key, sep, end);
+};
+
 struct task_config {
 	std::string program = "./benchmark/localmemory";
     std::string run_type = "shell"; //shell or python
     std::vector<param> params;
     std::string env = "env";
     std::string description = "Task Config Description";
-	SHINE_JSON_MODEL(task_config, program, run_type, params, env, description);
+    std::vector<cmd_result> results;
+	SHINE_JSON_MODEL(task_config, program, run_type, params, env, description, results);
 };
 
 #endif

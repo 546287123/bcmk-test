@@ -75,17 +75,66 @@ std::shared_ptr<std::vector<std::string>> CmdConfigTools::GenerateCmds(task_conf
         bool chg = false;
         for(int i=0; i<counts.size(); i++) {
             cmd += " ";
+            cmd += par_mat.at(i)->at(counts.at(i)-1);
             if(!chg) {
                 if(counts.at(i)>1) {
+                    counts.at(i) -= 1;
                     chg = true;
                 }
             }
-            cmd += par_mat.at(i)->at(counts.at(i)-1);
         }
         cmds->push_back(cmd);
     }
     //
     return cmds;
+}
+
+bool CmdConfigTools::JuiceResult(cmd_info &info) {
+    std::vector<std::string> vec;
+    for(int i=0; i<info.cmds->size(); i++) {
+        std::string cmd = info.cmds->at(i);
+        std::string res = info.results.at(i);
+        std::string juice = JuiceOneResult(res, info.boults);
+        vec.push_back(cmd + "\t" + juice);
+    }
+    //
+    std::ofstream ofs(info.result_file, std::ios::app);
+    for(auto one : vec) {
+        ofs << one << std::endl;
+    }
+    ofs.flush();
+    ofs.close();
+    //
+    return true;
+}
+
+std::string CmdConfigTools::JuiceOneResult(std::string str, std::vector<res_boult> &boults) {
+    std::string strRet("");
+    for(auto res : boults) {
+        int key_idx = str.find(res.key);
+        if(key_idx==-1) {
+            continue;
+        }
+        int sep_idx = str.find(res.sep, key_idx+1);
+        if(sep_idx==-1) {
+            continue;
+        }
+        int end_idx = str.find(res.end, sep_idx+1);
+        if(end_idx==-1) {
+            end_idx = str.length()-1;
+        }
+        std::string s = str.substr(sep_idx, end_idx-sep_idx+1);
+        if(*std::rbegin(s)=='\n') {
+            *std::rbegin(s)='\0';
+        }
+        //
+        strRet += res.key;
+        strRet += "\t";
+        strRet += s;
+        strRet += "\t";        
+        //
+    }
+    return strRet;
 }
 
 bool CmdConfigTools::LoadFromJson(std::string file, task_config &task_cfg) {
@@ -96,7 +145,7 @@ bool CmdConfigTools::LoadFromJson(std::string file, task_config &task_cfg) {
     std::string str;
     std::ifstream ifs(file.c_str(), std::ios::in);
     std::string line;
-    while (ifs>>line) {
+    while (getline(ifs,line)) {
         str += line;
     }
     ifs.close();

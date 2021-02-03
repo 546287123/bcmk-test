@@ -2,6 +2,7 @@
 #include "cmd_task_runner.h"
 #include "cmd_task_list.h"
 #include "../cmd_plugin/cmd_plug_mgr.h"
+#include "../cmd_config/cmd_config_tools.h"
 
 CmdTaskRunner &CmdTaskRunner::GetInstance() {
     static CmdTaskRunner instance;
@@ -42,7 +43,12 @@ void CmdTaskRunner::run() {
         if(CmdTaskList::GetInstance().GetNext(info)) {
             info.status = cmd_task_status::cmd_task_running;
             CmdTaskList::GetInstance().UpdateTask(info);
-            CmdPlugMgr::GetInstance().ExecuteCmd(info.info);
+            std::string str;
+            if(CmdPlugMgr::GetInstance().ExecuteCmd(info.info)) {
+                if(CmdConfigTools::GetInstance().JuiceResult(info.info)) {
+                   std::cout << info.info.cmd_json << "\tDone!" << std::endl;
+                }
+            }
         }
     }
     return;

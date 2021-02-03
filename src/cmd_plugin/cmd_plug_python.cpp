@@ -5,7 +5,7 @@ bool CmdPlugPython::AnalyseCmd(std::string cmd, cmd_info &info) {
     return false;
 }
 
-bool CmdPlugPython::ExecuteCmd(cmd_info info) {
+bool CmdPlugPython::ExecuteCmd(cmd_info &info) {
     return false;
 }
 

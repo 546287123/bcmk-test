@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include <map>
 
 enum cmd_type {
     cmd_exit,
@@ -24,6 +25,12 @@ static std::string plug_type_desp[plug_type_end] = {
     "python",
 };
 
+struct res_boult {
+    std::string key;
+    std::string sep;
+    std::string end;
+};
+
 struct cmd_info {
     cmd_type type;
     plug_type p_type;
@@ -31,7 +38,11 @@ struct cmd_info {
     std::shared_ptr<std::vector<std::string>> cmds;
     std::string env;
     std::string description;
-
+    //
+    std::vector<res_boult> boults;
+    std::vector<std::string> results;
+    std::string result_file;
+    //
     bool ResetPlugType(std::string run_type) {
         bool ret = false;
         for(int i=0; i<plug_type::plug_type_end; i++) {
@@ -52,17 +63,10 @@ enum cmd_task_status {
     cmd_task_end,
 };
 
-struct task_result {
-    std::string description;
-    std::string throughput;
-    std::string latency;
-};
-
 struct cmd_task_info {
     int task_id;
     cmd_info info;
     cmd_task_status status;
-    task_result result;
 
     int GetNewTaskID() {
         static int nTaskId = 0;

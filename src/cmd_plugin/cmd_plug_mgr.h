@@ -16,7 +16,7 @@ public:
     static CmdPlugMgr &GetInstance();
 public:
     bool AnalyseCmd(string cmd, cmd_info &info);
-    bool ExecuteCmd(cmd_info info);
+    bool ExecuteCmd(cmd_info &info);
     bool Exit();
 };
 

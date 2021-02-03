@@ -11,7 +11,7 @@ public:
     ~CmdPlugPython(){};
 public:
     virtual bool AnalyseCmd(std::string cmd, cmd_info &info);
-    virtual bool ExecuteCmd(cmd_info info);
+    virtual bool ExecuteCmd(cmd_info &info);
     virtual bool Exit();
 };
 

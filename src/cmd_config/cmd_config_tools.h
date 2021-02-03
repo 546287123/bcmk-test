@@ -3,6 +3,7 @@
 #define CMD_CONFIG_TOOLS_H
 
 #include "cmd_config.h"
+#include "../common/action_def.h"
 
 class ParamGenerBase {
 public:
@@ -47,10 +48,13 @@ public:
     std::shared_ptr<std::vector<std::string>> GeneratePars(param par);
     std::shared_ptr<std::vector<std::string>> GenerateCmds(task_config task_cfg);
     //
+    bool JuiceResult(cmd_info &info);
+    //
     bool LoadFromJson(std::string file, task_config &task_cfg);
     bool SaveToJson(std::string file, task_config task_cfg);
 private:
     bool DoOneSaveTest(std::string file);
+    std::string JuiceOneResult(std::string str, std::vector<res_boult> &boults);
 };
 
 

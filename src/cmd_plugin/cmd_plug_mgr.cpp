@@ -3,6 +3,7 @@
 #include "cmd_plug_shell.h"
 #include "cmd_plug_python.h"
 #include "../cmd_config/cmd_config_tools.h"
+#include "../common/action_def.h"
 
 CmdPlugMgr &CmdPlugMgr::GetInstance() {
     static CmdPlugMgr instance;
@@ -18,6 +19,14 @@ bool CmdPlugMgr::AnalyseCmd(std::string cmd, cmd_info &info) {
     info.env = task_cfg.env;
     info.cmd_json = cmd;
     info.description = task_cfg.description;
+    info.boults.clear();
+    for(auto res : task_cfg.results) {
+        res_boult boult;
+        boult.key = res.key;
+        boult.sep = res.sep;
+        boult.end = res.end;
+        info.boults.push_back(boult);
+    }
     if(!info.ResetPlugType(task_cfg.run_type)){
         cout << "run_type error " << task_cfg.run_type << std::endl;
         ret = false;
@@ -25,7 +34,7 @@ bool CmdPlugMgr::AnalyseCmd(std::string cmd, cmd_info &info) {
     return ret;
 }
 
-bool CmdPlugMgr::ExecuteCmd(cmd_info info) {
+bool CmdPlugMgr::ExecuteCmd(cmd_info &info) {
     std::shared_ptr<CmdPlugBase> plug;
     switch (info.p_type)
     {
