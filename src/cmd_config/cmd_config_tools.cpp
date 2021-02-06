@@ -59,7 +59,6 @@ std::shared_ptr<std::vector<std::string>> CmdConfigTools::GeneratePars(param par
 }
 
 std::shared_ptr<std::vector<std::string>> CmdConfigTools::GenerateCmds(task_config task_cfg) {
-    std::shared_ptr<std::vector<std::string>> cmds(new std::vector<std::string>());
     std::vector<std::shared_ptr<std::vector<std::string>>> par_mat;
     std::vector<int> counts;
     int total = 1;
@@ -70,20 +69,16 @@ std::shared_ptr<std::vector<std::string>> CmdConfigTools::GenerateCmds(task_conf
         counts.push_back(pars->size());
     }
     //
-    while(total--) {
-        std::string cmd = task_cfg.program;
-        bool chg = false;
-        for(int i=0; i<counts.size(); i++) {
-            cmd += " ";
-            cmd += par_mat.at(i)->at(counts.at(i)-1);
-            if(!chg) {
-                if(counts.at(i)>1) {
-                    counts.at(i) -= 1;
-                    chg = true;
-                }
-            }
+    std::shared_ptr<std::vector<std::string>> cmds(new std::vector<std::string>(total, task_cfg.program));
+    int group = 1;
+    for(int i=0; i<counts.size(); i++) {
+        int count = counts.at(i);
+        group *= count;
+        for(int idx=0; idx<total; idx++) {
+            std::string cur = cmds->at(idx);
+            std::string str = par_mat.at(i)->at((idx/(total/group))%count);
+            cmds->at(idx) = cur + " " + str;
         }
-        cmds->push_back(cmd);
     }
     //
     return cmds;
